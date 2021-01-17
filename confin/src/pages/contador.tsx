@@ -1,10 +1,15 @@
-import { useState } from "react";
+import Link from "next/link";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 
 function RetornaContador() {
   return (
     <Layout title="Confin">
-      Go To <a href="/">Home</a>
+      <p className="mt-10 text-center">
+        <Link href="/">
+          <a className="text-2xl underline">Home</a>
+        </Link>
+      </p>
       <div>
         <Contador />
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Link from "next/Link";
+import Link from "next/link";
+
 export default function pokemon({ pokeman }) {
   return (
     <Layout title={pokeman.name}>
