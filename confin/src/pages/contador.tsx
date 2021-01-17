@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 
 function RetornaContador() {
   return (
-    <Layout title="Confin">
+    <Layout title="Contador">
       <p className="mt-10 text-center">
         <Link href="/">
           <a className="text-2xl underline">Home</a>

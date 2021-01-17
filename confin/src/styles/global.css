@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"); */
+/* @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); */
+
 @tailwind base;
 
 /* Write your own custom base styles here */
@@ -6,10 +10,13 @@
 @tailwind components;
 /* Stop purging. */
 
-/* html,
-body {
-  @apply bg-gray-50 dark:bg-gray-900;
-} */
+/* html, */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
 
 /* Write your own custom component styles here */
 /* .btn-blue {

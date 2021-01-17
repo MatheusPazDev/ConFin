@@ -9,10 +9,15 @@ module.exports = {
       colors: {
         "accent-1": "#333",
       },
+
+      backgroundColor: {
+        roxo: "#150019",
+        cor: "#3e0748",
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: { backgroundColor: ["active"] },
   },
   plugins: [],
 };
