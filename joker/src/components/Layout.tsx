@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import * as AiIcons from "react-icons/ai";
 
 import Transition from "./hooks/Transition";
@@ -31,7 +32,7 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
         leaveTo="-ml-64"
       >
         <aside
-          className={`bg-white w-64 min-h-screen flex flex-col ${
+          className={`z-20 bg-white w-64 min-h-screen flex flex-col ${
             isStatic ? "" : "fixed"
           }`}
         >
@@ -54,25 +55,54 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
             <nav>
               <ul>
                 <li className="p-3">
-                  <a href="/">Home</a>
+                  <Link href="/">
+                    <a>Home</a>
+                  </Link>
                 </li>
                 <li className="p-3">
-                  <a href="/mov/entrada">Entrada</a>
+                  <Link href="/mov/entrada">
+                    <a>Entrada</a>
+                  </Link>
                 </li>
                 <li className="p-3">
-                  <a href="/mov/saida">Saida</a>
+                  <Link href="/mov/saida">
+                    <a>Saida</a>
+                  </Link>
                 </li>
                 <li className="p-3">
-                  <a href="/mov/saldo">Saldo</a>
+                  <Link href="/mov/saldo">
+                    <a>Saldo</a>
+                  </Link>
                 </li>
                 <li className="p-3">
-                  <a href="/about">About</a>
+                  <Link href="/about">
+                    <a>About</a>
+                  </Link>
+                </li>
+                <li className="p-3">
+                  <Link href="/users">
+                    <a>Users</a>
+                  </Link>
                 </li>
               </ul>
             </nav>
           </div>
         </aside>
       </Transition>
+
+      <Transition
+        appear={true}
+        show={!isStatic && !isClosed}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-50"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-50"
+        leaveTo="opacity-0"
+      >
+        <div className="fixed inset-0 bg-black opacity-0"></div>
+      </Transition>
+
       <main className="flex-grow flex flex-col min-h-screen">
         <header className="bg-white border-b h-10 flex items-center justify-center">
           {!isStatic && (
