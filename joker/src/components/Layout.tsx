@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from "react";
 import Head from "next/head";
 import * as AiIcons from "react-icons/ai";
 
+import Transition from "./hooks/Transition";
 import useBreakpoint from "./hooks/useBreakpoint";
 
 type Props = {
@@ -20,7 +21,15 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      {(isStatic || !isClosed) && (
+      <Transition
+        appear={false}
+        show={isStatic || !isClosed}
+        enter="transition-all duration-500"
+        enterFrom="-ml-64"
+        enterTo="ml-0"
+        leave="transition-all duration-500"
+        leaveTo="-ml-64"
+      >
         <aside className="bg-white w-64 min-h-screen flex flex-col">
           <div className="bg-white border-r border-b px-4 h-10 flex items-center">
             <span className="text-blue py-2"> Aplication </span>
@@ -48,7 +57,7 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
             </nav>
           </div>
         </aside>
-      )}
+      </Transition>
       <main className="flex-grow flex flex-col min-h-screen">
         <header className="bg-white border-b h-10 flex items-center justify-center">
           {!isStatic &&
