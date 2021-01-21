@@ -1,21 +1,17 @@
 import React, { ReactNode, useState } from "react";
 import Head from "next/head";
-import { useMediaQuery } from "react-responsive";
-
 import * as AiIcons from "react-icons/ai";
+
+import useBreakpoint from "./hooks/useBreakpoint";
 
 type Props = {
   children?: ReactNode;
   title?: string;
 };
-1;
+
 function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
   const [isClosed, setClosed] = useState(false);
-
-  const isStatic = useMediaQuery({
-    query: "(min-width:640px)",
-  });
-
+  const isStatic = useBreakpoint("sm");
   return (
     <div className="bg-gray-100 flex">
       <Head>
