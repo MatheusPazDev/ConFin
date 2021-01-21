@@ -5,8 +5,10 @@ type Props = {
   children?: ReactNode;
   title?: string;
 };
-
-function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
+1;
+function Layout({
+  /*children,*/ title = "Confin - Controle Financeiro",
+}: Props) {
   return (
     <div className="bg-gray-100 flex">
       <Head>
