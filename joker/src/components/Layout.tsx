@@ -30,9 +30,24 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
         leave="transition-all duration-500"
         leaveTo="-ml-64"
       >
-        <aside className="bg-white w-64 min-h-screen flex flex-col">
-          <div className="bg-white border-r border-b px-4 h-10 flex items-center">
+        <aside
+          className={`bg-white w-64 min-h-screen flex flex-col ${
+            isStatic ? "" : "fixed"
+          }`}
+        >
+          <div className="bg-white border-r border-b px-4 h-10 flex items-center justify-between">
             <span className="text-blue py-2"> Aplication </span>
+            {!isStatic && (
+              <button
+                tabIndex={1}
+                aria-label="Close Menu"
+                title="Close Menu"
+                className="p-1"
+                onClick={() => setClosed(true)}
+              >
+                <AiIcons.AiOutlineClose size={26} color="rgba(0,0,0,0.6)" />
+              </button>
+            )}
           </div>
 
           <div className="border-r flex-grow">
@@ -60,31 +75,18 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
       </Transition>
       <main className="flex-grow flex flex-col min-h-screen">
         <header className="bg-white border-b h-10 flex items-center justify-center">
-          {!isStatic &&
-            (isClosed ? (
-              <button
-                tabIndex={1}
-                aria-label="Open Menu"
-                title="Open Menu"
-                className="p-1"
-                onClick={() => setClosed(false)}
-              >
-                <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
-              </button>
-            ) : (
-              <button
-                tabIndex={1}
-                aria-label="Close Menu"
-                title="Close Menu"
-                className="p-1"
-                onClick={() => setClosed(true)}
-              >
-                <AiIcons.AiOutlineCloseCircle
-                  size={26}
-                  color="rgba(0,0,0,0.6)"
-                />
-              </button>
-            ))}
+          {!isStatic && (
+            <button
+              tabIndex={1}
+              aria-hidden={!isClosed}
+              aria-label="Open Menu"
+              title="Open Menu"
+              className="p-1"
+              onClick={() => setClosed(false)}
+            >
+              <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
+            </button>
+          )}
 
           <div className="flex flex-grow items-center justify-between px-3">
             <span className="flex items-center">
