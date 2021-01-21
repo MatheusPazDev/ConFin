@@ -1,10 +1,15 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext*/ } from "next/app";
+import NoSSR from "../components/NoSSR";
 
 import "../styles/global.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <NoSSR>
+      <Component {...pageProps} />
+    </NoSSR>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for

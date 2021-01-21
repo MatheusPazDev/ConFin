@@ -1,14 +1,21 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import Head from "next/head";
+import { useMediaQuery } from "react-responsive";
+
+import * as AiIcons from "react-icons/ai";
 
 type Props = {
   children?: ReactNode;
   title?: string;
 };
 1;
-function Layout({
-  /*children,*/ title = "Confin - Controle Financeiro",
-}: Props) {
+function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
+  const [isClosed, setClosed] = useState(false);
+
+  const isStatic = useMediaQuery({
+    query: "(min-width:640px)",
+  });
+
   return (
     <div className="bg-gray-100 flex">
       <Head>
@@ -17,35 +24,63 @@ function Layout({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <aside className="bg-white w-64 min-h-screen flex flex-col">
-        <div className="bg-white border-r border-b px-4 h-10 flex items-center">
-          <span className="text-blue py-2"> Aplication </span>
-        </div>
+      {(isStatic || !isClosed) && (
+        <aside className="bg-white w-64 min-h-screen flex flex-col">
+          <div className="bg-white border-r border-b px-4 h-10 flex items-center">
+            <span className="text-blue py-2"> Aplication </span>
+          </div>
 
-        <div className="border-r flex-grow">
-          <nav>
-            <ul>
-              <li className="p-3">
-                <a href="/">Home</a>
-              </li>
-              <li className="p-3">
-                <a href="/mov/entrada">Entrada</a>
-              </li>
-              <li className="p-3">
-                <a href="/mov/saida">Saida</a>
-              </li>
-              <li className="p-3">
-                <a href="/mov/saldo">Saldo</a>
-              </li>
-              <li className="p-3">
-                <a href="/about">About</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </aside>
+          <div className="border-r flex-grow">
+            <nav>
+              <ul>
+                <li className="p-3">
+                  <a href="/">Home</a>
+                </li>
+                <li className="p-3">
+                  <a href="/mov/entrada">Entrada</a>
+                </li>
+                <li className="p-3">
+                  <a href="/mov/saida">Saida</a>
+                </li>
+                <li className="p-3">
+                  <a href="/mov/saldo">Saldo</a>
+                </li>
+                <li className="p-3">
+                  <a href="/about">About</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      )}
       <main className="flex-grow flex flex-col min-h-screen">
         <header className="bg-white border-b h-10 flex items-center justify-center">
+          {!isStatic &&
+            (isClosed ? (
+              <button
+                tabIndex={1}
+                aria-label="Open Menu"
+                title="Open Menu"
+                className="p-1"
+                onClick={() => setClosed(false)}
+              >
+                <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
+              </button>
+            ) : (
+              <button
+                tabIndex={1}
+                aria-label="Close Menu"
+                title="Close Menu"
+                className="p-1"
+                onClick={() => setClosed(true)}
+              >
+                <AiIcons.AiOutlineCloseCircle
+                  size={26}
+                  color="rgba(0,0,0,0.6)"
+                />
+              </button>
+            ))}
+
           <div className="flex flex-grow items-center justify-between px-3">
             <span className="flex items-center">
               [LOGO]
@@ -54,6 +89,7 @@ function Layout({
             <button className="text-blue-700 underline"> Log In</button>
           </div>
         </header>
+        <div className="bg-green-200">{children}</div>
       </main>
     </div>
   );
