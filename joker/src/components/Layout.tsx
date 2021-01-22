@@ -13,7 +13,7 @@ type Props = {
 };
 
 function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
-  const [isClosed, setClosed] = useState(false);
+  const [isClosed, setClosed] = useState(true);
   const isStatic = useBreakpoint("sm");
 
   return (
@@ -106,7 +106,10 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
         leaveFrom="opacity-50"
         leaveTo="opacity-0"
       >
-        <div className="fixed inset-0 bg-black opacity-0"></div>
+        <div
+          className="fixed inset-0 bg-black opacity-0"
+          onClick={() => setClosed(true)}
+        />
       </Transition>
 
       <main className="flex-grow flex flex-col min-h-screen">
