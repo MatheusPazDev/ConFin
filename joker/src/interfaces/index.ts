@@ -10,7 +10,9 @@ export type User = {
 };
 
 export type Menu = {
-  id: number;
-  titulo: string;
-  url: string;
+  cod_menu: number;
+  str_label: string;
+  str_url: string;
+  str_class: string;
+  sub_menu: Menu[];
 };

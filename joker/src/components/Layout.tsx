@@ -3,9 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import * as AiIcons from "react-icons/ai";
 
-import Transition from "./hooks/Transition";
-import useBreakpoint from "./hooks/useBreakpoint";
-import FocusTrap from "./hooks/FocusTrap";
+import Transition from "./utils/Transition";
+import useBreakpoint from "./utils/useBreakpoint";
+import FocusTrap from "./utils/FocusTrap";
 
 type Props = {
   children?: ReactNode;
@@ -13,7 +13,7 @@ type Props = {
 };
 
 function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
-  const [isClosed, setClosed] = useState(false);
+  const [isClosed, setClosed] = useState(true);
   const isStatic = useBreakpoint("sm");
 
   return (
@@ -106,7 +106,10 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
         leaveFrom="opacity-50"
         leaveTo="opacity-0"
       >
-        <div className="fixed inset-0 bg-black opacity-0"></div>
+        <div
+          className="fixed inset-0 bg-black opacity-0"
+          onClick={() => setClosed(true)}
+        />
       </Transition>
 
       <main className="flex-grow flex flex-col min-h-screen">

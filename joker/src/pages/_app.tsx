@@ -1,6 +1,6 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext*/ } from "next/app";
-import NoSSR from "../components/NoSSR";
+import NoSSR from "../components/utils/NoSSR";
 
 import "../styles/global.css";
 
