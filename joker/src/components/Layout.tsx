@@ -3,9 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import * as AiIcons from "react-icons/ai";
 
-import Transition from "./hooks/Transition";
-import useBreakpoint from "./hooks/useBreakpoint";
-import FocusTrap from "./hooks/FocusTrap";
+import Transition from "./utils/Transition";
+import useBreakpoint from "./utils/useBreakpoint";
+import FocusTrap from "./utils/FocusTrap";
 
 type Props = {
   children?: ReactNode;
