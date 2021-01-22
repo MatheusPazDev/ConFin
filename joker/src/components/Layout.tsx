@@ -5,6 +5,7 @@ import * as AiIcons from "react-icons/ai";
 
 import Transition from "./hooks/Transition";
 import useBreakpoint from "./hooks/useBreakpoint";
+import FocusTrap from "./hooks/FocusTrap";
 
 type Props = {
   children?: ReactNode;
@@ -14,6 +15,7 @@ type Props = {
 function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
   const [isClosed, setClosed] = useState(false);
   const isStatic = useBreakpoint("sm");
+
   return (
     <div className="bg-gray-100 flex">
       <Head>
@@ -36,57 +38,61 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
             isStatic ? "" : "fixed"
           }`}
         >
-          <div className="bg-white border-r border-b px-4 h-10 flex items-center justify-between">
-            <span className="text-blue py-2"> Aplication </span>
-            {!isStatic && (
-              <button
-                tabIndex={1}
-                aria-label="Close Menu"
-                title="Close Menu"
-                className="p-1"
-                onClick={() => setClosed(true)}
-              >
-                <AiIcons.AiOutlineClose size={26} color="rgba(0,0,0,0.6)" />
-              </button>
-            )}
-          </div>
+          <FocusTrap isActive={!isStatic}>
+            <div className="bg-white border-r border-b px-4 h-10 flex items-center justify-between">
+              <span className="text-blue py-2"> Aplication </span>
+              {!isStatic && (
+                <button
+                  /*TODO: RESOLVER O PROBLEMA DO AUTOFOCUS QUEBRANDO A ANIMAÇÃO DE ABRIR O SIDEBAR*/
+                  // autoFocus
+                  id="closeMenu"
+                  aria-label="Close Menu"
+                  title="Close Menu"
+                  className="p-1"
+                  onClick={() => setClosed(true)}
+                >
+                  <AiIcons.AiOutlineClose size={26} color="rgba(0,0,0,0.6)" />
+                </button>
+              )}
+            </div>
 
-          <div className="border-r flex-grow">
-            <nav>
-              <ul>
-                <li className="p-3">
-                  <Link href="/">
-                    <a>Home</a>
-                  </Link>
-                </li>
-                <li className="p-3">
-                  <Link href="/mov/entrada">
-                    <a>Entrada</a>
-                  </Link>
-                </li>
-                <li className="p-3">
-                  <Link href="/mov/saida">
-                    <a>Saida</a>
-                  </Link>
-                </li>
-                <li className="p-3">
-                  <Link href="/mov/saldo">
-                    <a>Saldo</a>
-                  </Link>
-                </li>
-                <li className="p-3">
-                  <Link href="/about">
-                    <a>About</a>
-                  </Link>
-                </li>
-                <li className="p-3">
-                  <Link href="/users">
-                    <a>Users</a>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
+            <div className="border-r flex-grow ">
+              <nav>
+                <ul>
+                  <li className="p-3">
+                    <Link href="/">
+                      <a>Home</a>
+                    </Link>
+                  </li>
+                  <li className="p-3">
+                    <Link href="/mov/entrada">
+                      <a>Entrada</a>
+                    </Link>
+                  </li>
+                  <li className="p-3">
+                    <Link href="/mov/saida">
+                      <a>Saida</a>
+                    </Link>
+                  </li>
+                  <li className="p-3">
+                    <Link href="/mov/saldo">
+                      <a>Saldo</a>
+                    </Link>
+                  </li>
+                  <li className="p-3">
+                    <Link href="/about">
+                      <a>About</a>
+                    </Link>
+                  </li>
+                  <li className="p-3">
+                    <Link href="/users">
+                      <a>Users</a>
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </FocusTrap>
         </aside>
       </Transition>
 
