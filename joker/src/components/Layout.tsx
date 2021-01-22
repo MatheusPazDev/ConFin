@@ -1,11 +1,12 @@
 import React, { ReactNode, useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import * as AiIcons from "react-icons/ai";
 
 import Transition from "./utils/Transition";
 import useBreakpoint from "./utils/useBreakpoint";
 import FocusTrap from "./utils/FocusTrap";
+
+import Sidebar from "./sidebar/Sidebar";
 
 type Props = {
   children?: ReactNode;
@@ -56,41 +57,8 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
               )}
             </div>
 
-            <div className="border-r flex-grow ">
-              <nav>
-                <ul>
-                  <li className="p-3">
-                    <Link href="/">
-                      <a>Home</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/mov/entrada">
-                      <a>Entrada</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/mov/saida">
-                      <a>Saida</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/mov/saldo">
-                      <a>Saldo</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/about">
-                      <a>About</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/users">
-                      <a>Users</a>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
+            <div className="border-r flex-grow h-full">
+              <Sidebar />
             </div>
           </FocusTrap>
         </aside>
