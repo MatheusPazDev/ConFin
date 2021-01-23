@@ -17,7 +17,7 @@ function Sidebar() {
   let depthStep = 10;
 
   return (
-    <div className="bg-gray-500 h-full">
+    <div className="mx-3 list-none">
       <ul>
         {MenuData.map((MenuItem) => (
           <React.Fragment key={MenuItem.cod_menu}>
@@ -46,14 +46,14 @@ function SidebarItem(menu: SidebarMenu) {
       <span onClick={showSubMenu} key={cod_menu} className="p-3">
         <div
           style={{ paddingLeft: depth * depthStep }}
-          className="bg-purple-400 flex items-center justify-between px-3 text-white hover:bg-purple-800"
+          className="flex items-center justify-between  text-white hover:bg-purple-800"
         >
           {Array.isArray(sub_menu) && sub_menu.length ? (
-            <span>{str_label}</span>
+            <span className="">{str_label}</span>
           ) : (
-            <span>
+            <span className="">
               <Link href={str_url}>
-                <a className="">{str_label}</a>
+                <a className=" bg-black inline-block">{str_label}</a>
               </Link>
             </span>
           )}

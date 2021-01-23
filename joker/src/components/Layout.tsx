@@ -14,11 +14,11 @@ type Props = {
 };
 
 function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
-  const [isClosed, setClosed] = useState(true);
   const isStatic = useBreakpoint("sm");
+  const [isClosed, setClosed] = useState(true);
 
   return (
-    <div className="bg-gray-100 flex">
+    <div className="bg-gray-100 flex border-r">
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
@@ -35,12 +35,12 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
         leaveTo="-ml-64"
       >
         <aside
-          className={`z-20 bg-white w-64 min-h-screen flex flex-col ${
+          className={`z-20 bg-indigo-900 w-64 min-h-screen flex flex-col ${
             isStatic ? "" : "fixed"
           }`}
         >
           <FocusTrap isActive={!isStatic}>
-            <div className="bg-white border-r border-b px-4 h-10 flex items-center justify-between">
+            <div className="bg-white border-b px-4 h-10 flex items-center justify-between">
               <span className="text-blue py-2"> Aplication </span>
               {!isStatic && (
                 <button
@@ -57,7 +57,7 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
               )}
             </div>
 
-            <div className="border-r flex-grow h-full">
+            <div className="">
               <Sidebar />
             </div>
           </FocusTrap>
