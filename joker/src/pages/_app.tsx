@@ -1,5 +1,6 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext*/ } from "next/app";
+import Layout from "../components/Layout";
 import NoSSR from "../components/utils/NoSSR";
 
 import "../styles/global.css";
@@ -7,7 +8,9 @@ import "../styles/global.css";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <NoSSR>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </NoSSR>
   );
 }

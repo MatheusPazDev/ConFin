@@ -103,7 +103,7 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
             <button className="text-blue-700 underline"> Log In</button>
           </div>
         </header>
-        <div className="bg-green-200">{children}</div>
+        <div className="bg-green-200 m-2 p-2">{children}</div>
       </main>
     </div>
   );
