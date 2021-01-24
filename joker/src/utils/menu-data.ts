@@ -46,9 +46,9 @@ export const MenuData: Menu[] = [
   },
   {
     cod_menu: 206,
-    str_label: "Users",
-    str_url: "/users",
-    str_class: "user",
+    str_label: "Support",
+    str_url: "/support",
+    str_class: "Support",
     sub_menu: [],
   },
 ];

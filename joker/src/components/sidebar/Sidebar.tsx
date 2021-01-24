@@ -1,75 +1,95 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 
-import { TiPlus, TiMinus } from "react-icons/ti";
+import { IconContext } from "react-icons";
+import * as AiIcons from "react-icons/ai";
+import * as GiIcons from "react-icons/gi";
 
-import { Menu } from "../../interfaces";
+import Transition from "../utils/Transition";
+import FocusTrap from "../utils/FocusTrap";
+
 import { MenuData } from "../../utils/menu-data";
+import SidebarItem from "./SidebarItem";
 
-interface SidebarMenu {
-  items: Menu;
-  depth: number;
-  depthStep: number;
-}
-
-function Sidebar() {
+function Sidebar({ isStatic, isSidebar, showSidebar }: any) {
   let depth = 0;
   let depthStep = 10;
 
   return (
-    <div className="mx-3 list-none">
-      <ul>
-        {MenuData.map((MenuItem) => (
-          <React.Fragment key={MenuItem.cod_menu}>
-            <SidebarItem depth={depth} depthStep={depthStep} items={MenuItem} />
-          </React.Fragment>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function SidebarItem(menu: SidebarMenu) {
-  const { cod_menu, str_label, str_url, /*str_classe,*/ sub_menu } = menu.items;
-  const { depth, depthStep } = menu;
-
-  const [isClosed, setClosed] = useState(true);
-  const showSubMenu = () => setClosed(!isClosed);
-
-  let expandIcon;
-  if (Array.isArray(sub_menu) && sub_menu.length) {
-    expandIcon = !isClosed ? <TiMinus /> : <TiPlus />;
-  }
-
-  return (
     <>
-      <span onClick={showSubMenu} key={cod_menu} className="p-3">
-        <div
-          style={{ paddingLeft: depth * depthStep }}
-          className="flex items-center justify-between  text-white hover:bg-purple-800"
+      <Transition
+        appear={false}
+        show={isStatic || !isSidebar}
+        enter="transition-all duration-500"
+        enterFrom="-ml-64"
+        enterTo="ml-0"
+        leave="transition-all duration-500"
+        leaveTo="-ml-64"
+      >
+        <aside
+          className={`z-20 bg-indigo-900 w-64 min-h-screen flex flex-col ${
+            isStatic ? "" : "fixed"
+          }`}
         >
-          {Array.isArray(sub_menu) && sub_menu.length ? (
-            <span className="">{str_label}</span>
-          ) : (
-            <span className="">
-              <Link href={str_url}>
-                <a className=" bg-black inline-block">{str_label}</a>
-              </Link>
-            </span>
-          )}
-          <span>{expandIcon}</span>
-        </div>
-      </span>
-      {!isClosed &&
-        sub_menu.map((subItem, index) => (
-          <React.Fragment key={`${subItem.cod_menu} ${index}`}>
-            <SidebarItem
-              depth={depth + 1}
-              depthStep={depthStep}
-              items={subItem}
-            />
-          </React.Fragment>
-        ))}
+          <FocusTrap isActive={!isStatic}>
+            <IconContext.Provider
+              value={{
+                color: "rgba(229, 231, 235, 1)",
+                className: "global-class-name",
+              }}
+            >
+              <div className="bg-gray-900 bg-opacity-50 border-b border-black text-gray-200 px-4 h-10 flex items-center justify-between">
+                {!isStatic && (
+                  <button
+                    /*TODO: RESOLVER O PROBLEMA DO AUTOFOCUS QUEBRANDO A ANIMAÇÃO DE ABRIR O SIDEBAR*/
+                    // autoFocus
+                    id="closeMenu"
+                    aria-label="Close Menu"
+                    title="Close Menu"
+                    className="p-1"
+                    onClick={showSidebar}
+                  >
+                    <AiIcons.AiOutlineClose size={30} />
+                  </button>
+                )}
+                <span className="text-blue-400 font-bold py-2 text-3xl flex items-center ">
+                  <GiIcons.GiCash color="rgba(96, 165, 250, 1)" />
+                  <span className="ml-3"> ConFin</span>
+                </span>
+              </div>
+
+              <div className="mx-2 mt-3">
+                <ul>
+                  {MenuData.map((MenuItem) => (
+                    <React.Fragment key={MenuItem.cod_menu}>
+                      <SidebarItem
+                        depth={depth}
+                        depthStep={depthStep}
+                        items={MenuItem}
+                        showSidebar={showSidebar}
+                      />
+                    </React.Fragment>
+                  ))}
+                </ul>
+              </div>
+            </IconContext.Provider>
+          </FocusTrap>
+        </aside>
+      </Transition>
+      <Transition
+        appear={true}
+        show={!isStatic && !isSidebar}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-50"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-50"
+        leaveTo="opacity-0"
+      >
+        <div
+          className="fixed inset-0 bg-black opacity-0"
+          onClick={showSidebar}
+        />
+      </Transition>
     </>
   );
 }
