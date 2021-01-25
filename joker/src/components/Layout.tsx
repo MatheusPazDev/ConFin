@@ -1,11 +1,10 @@
 import React, { ReactNode, useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import * as AiIcons from "react-icons/ai";
 
-import Transition from "./utils/Transition";
 import useBreakpoint from "./utils/useBreakpoint";
-import FocusTrap from "./utils/FocusTrap";
+
+import Sidebar from "./sidebar/Sidebar";
 
 type Props = {
   children?: ReactNode;
@@ -13,129 +12,52 @@ type Props = {
 };
 
 function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
-  const [isClosed, setClosed] = useState(true);
   const isStatic = useBreakpoint("sm");
+  const [isSidebar, setSidebar] = useState(true);
+  const showSidebar = () => setSidebar(!isSidebar);
 
   return (
-    <div className="bg-gray-100 flex">
+    <div className="bg-gray-100 flex border-r">
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <Transition
-        appear={false}
-        show={isStatic || !isClosed}
-        enter="transition-all duration-500"
-        enterFrom="-ml-64"
-        enterTo="ml-0"
-        leave="transition-all duration-500"
-        leaveTo="-ml-64"
-      >
-        <aside
-          className={`z-20 bg-white w-64 min-h-screen flex flex-col ${
-            isStatic ? "" : "fixed"
-          }`}
-        >
-          <FocusTrap isActive={!isStatic}>
-            <div className="bg-white border-r border-b px-4 h-10 flex items-center justify-between">
-              <span className="text-blue py-2"> Aplication </span>
-              {!isStatic && (
-                <button
-                  /*TODO: RESOLVER O PROBLEMA DO AUTOFOCUS QUEBRANDO A ANIMAÇÃO DE ABRIR O SIDEBAR*/
-                  // autoFocus
-                  id="closeMenu"
-                  aria-label="Close Menu"
-                  title="Close Menu"
-                  className="p-1"
-                  onClick={() => setClosed(true)}
-                >
-                  <AiIcons.AiOutlineClose size={26} color="rgba(0,0,0,0.6)" />
-                </button>
-              )}
-            </div>
-
-            <div className="border-r flex-grow ">
-              <nav>
-                <ul>
-                  <li className="p-3">
-                    <Link href="/">
-                      <a>Home</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/mov/entrada">
-                      <a>Entrada</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/mov/saida">
-                      <a>Saida</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/mov/saldo">
-                      <a>Saldo</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/about">
-                      <a>About</a>
-                    </Link>
-                  </li>
-                  <li className="p-3">
-                    <Link href="/users">
-                      <a>Users</a>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </FocusTrap>
-        </aside>
-      </Transition>
-
-      <Transition
-        appear={true}
-        show={!isStatic && !isClosed}
-        enter="transition-opacity duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-50"
-        leave="transition-opacity duration-300"
-        leaveFrom="opacity-50"
-        leaveTo="opacity-0"
-      >
-        <div
-          className="fixed inset-0 bg-black opacity-0"
-          onClick={() => setClosed(true)}
-        />
-      </Transition>
+      <Sidebar
+        isStatic={isStatic}
+        isSidebar={isSidebar}
+        showSidebar={showSidebar}
+      />
 
       <main className="flex-grow flex flex-col min-h-screen">
-        <header className="bg-white border-b h-10 flex items-center justify-center">
-          {!isStatic && (
-            <button
-              tabIndex={1}
-              aria-hidden={!isClosed}
-              aria-label="Open Menu"
-              title="Open Menu"
-              className="p-1"
-              onClick={() => setClosed(false)}
-            >
-              <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
-            </button>
-          )}
+        <header className="bg-indigo-900 h-14 flex items-center justify-center">
+          <div className="bg-gray-900 bg-opacity-50  px-3 h-14 text-white flex flex-grow items-center justify-between ">
+            {!isStatic && (
+              <button
+                tabIndex={1}
+                aria-hidden={!isSidebar}
+                aria-label="Open Menu"
+                title="Open Menu"
+                className="p-1"
+                onClick={showSidebar}
+              >
+                <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
+              </button>
+            )}
 
-          <div className="flex flex-grow items-center justify-between px-3">
-            <span className="flex items-center">
-              [LOGO]
-              <h1>ConFin</h1>
+            <span className="text-blue-400 font-bold text-xl flex items-center">
+              <span className="text-white">
+                <span className="text-blue-400 text-2xl"> Alberto Camargo</span>
+              </span>
             </span>
-            <button className="text-blue-700 underline"> Log In</button>
+            <button className="text-blue-700 underline text-2xl">Log In</button>
           </div>
         </header>
-        <div className="bg-green-200">{children}</div>
+
+        <div className="bg-green-200 m-2 p-2">
+          <>{children}</>
+        </div>
       </main>
     </div>
   );
