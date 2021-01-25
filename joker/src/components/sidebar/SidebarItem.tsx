@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-import { TiPlus, TiMinus } from "react-icons/ti";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 import { Menu } from "../../interfaces";
