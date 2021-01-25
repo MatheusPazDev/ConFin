@@ -11,7 +11,7 @@ import { MenuData } from "../../utils/menu-data";
 import SidebarItem from "./SidebarItem";
 
 function Sidebar({ isStatic, isSidebar, showSidebar }: any) {
-  let depth = 0;
+  let depth = 1;
   let depthStep = 10;
 
   return (
@@ -26,7 +26,7 @@ function Sidebar({ isStatic, isSidebar, showSidebar }: any) {
         leaveTo="-ml-64"
       >
         <aside
-          className={`z-20 bg-indigo-900 w-64 min-h-screen flex flex-col ${
+          className={`z-20 bg-indigo-900 w-64  min-h-screen flex flex-col ${
             isStatic ? "" : "fixed"
           }`}
         >
@@ -37,7 +37,7 @@ function Sidebar({ isStatic, isSidebar, showSidebar }: any) {
                 className: "global-class-name",
               }}
             >
-              <div className="bg-gray-900 bg-opacity-50 border-b border-black text-gray-200 px-4 h-10 flex items-center justify-between">
+              <div className="bg-gray-900 bg-opacity-50 text-gray-200 px-4 h-14 flex items-center justify-between">
                 {!isStatic && (
                   <button
                     /*TODO: RESOLVER O PROBLEMA DO AUTOFOCUS QUEBRANDO A ANIMAÇÃO DE ABRIR O SIDEBAR*/
@@ -53,7 +53,7 @@ function Sidebar({ isStatic, isSidebar, showSidebar }: any) {
                 )}
                 <span className="text-blue-400 font-bold py-2 text-3xl flex items-center ">
                   <GiIcons.GiCash color="rgba(96, 165, 250, 1)" />
-                  <span className="ml-3"> ConFin</span>
+                  <span className="ml-3">ConFin</span>
                 </span>
               </div>
 

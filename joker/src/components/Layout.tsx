@@ -31,26 +31,27 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
       />
 
       <main className="flex-grow flex flex-col min-h-screen">
-        <header className="bg-indigo-900 border-b h-10 flex items-center justify-center">
-          {!isStatic && (
-            <button
-              tabIndex={1}
-              aria-hidden={!isSidebar}
-              aria-label="Open Menu"
-              title="Open Menu"
-              className="p-1"
-              onClick={showSidebar}
-            >
-              <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
-            </button>
-          )}
+        <header className="bg-indigo-900 h-14 flex items-center justify-center">
+          <div className="bg-gray-900 bg-opacity-50  px-3 h-14 text-white flex flex-grow items-center justify-between ">
+            {!isStatic && (
+              <button
+                tabIndex={1}
+                aria-hidden={!isSidebar}
+                aria-label="Open Menu"
+                title="Open Menu"
+                className="p-1"
+                onClick={showSidebar}
+              >
+                <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
+              </button>
+            )}
 
-          <div className="bg-gray-900 bg-opacity-50 border-b border-black py-2 flex flex-grow items-center justify-between px-3">
-            <span className="flex items-center">
-              [LOGO]
-              <h1>ConFin</h1>
+            <span className="text-blue-400 font-bold text-xl flex items-center">
+              <span className="text-white">
+                <span className="text-blue-400 text-2xl"> Alberto Camargo</span>
+              </span>
             </span>
-            <button className="text-blue-700 underline"> Log In</button>
+            <button className="text-blue-700 underline text-2xl">Log In</button>
           </div>
         </header>
 

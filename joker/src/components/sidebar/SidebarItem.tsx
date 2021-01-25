@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { TiPlus, TiMinus } from "react-icons/ti";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 import { Menu } from "../../interfaces";
 
@@ -21,44 +22,55 @@ function SidebarItem(menu: SidebarMenu) {
 
   let expandIcon;
   if (Array.isArray(sub_menu) && sub_menu.length) {
-    expandIcon = !isClosed ? <TiMinus /> : <TiPlus />;
+    expandIcon = !isClosed ? <IoIosArrowUp /> : <IoIosArrowDown />;
   }
 
   return (
-    <>
-      <span onClick={showSubMenu} key={cod_menu} className="">
-        <div className="  text-white ">
-          <Link
-            href={Array.isArray(sub_menu) && sub_menu.length ? "#" : str_url}
+    <div className="border-t text-white ">
+      <span
+        key={cod_menu}
+        className="flex items-center mb-2 mt-1 justify-between rounded-lg hover:bg-purple-800"
+      >
+        <Link
+          href={Array.isArray(sub_menu) && sub_menu.length ? str_url : str_url}
+        >
+          <a
+            style={{ paddingLeft: depth * depthStep }}
+            className="h-full w-full p-3 flex items-center justify-between  "
+            onClick={
+              !(Array.isArray(sub_menu) && sub_menu.length)
+                ? menu.showSidebar
+                : menu.showSidebar
+            }
           >
-            <a
-              style={{ paddingLeft: depth * depthStep }}
-              className=" bg-black  w-full pl-2 mb-2 flex items-center justify-between hover:bg-purple-800"
-              onClick={
-                !(Array.isArray(sub_menu) && sub_menu.length)
-                  ? menu.showSidebar
-                  : ""
-              }
-            >
-              {str_label} {expandIcon}
-            </a>
-          </Link>
-
-          <span className="bg-green-"></span>
-        </div>
+            {str_label}
+          </a>
+        </Link>
+        {expandIcon ? (
+          <span
+            className="bg-indigo-900  py-3 px-2 border-r-2 border-l-2 border-purple-400 rounded-full cursor-pointer flex items-center justify-center"
+            onClick={showSubMenu}
+          >
+            {expandIcon}
+          </span>
+        ) : (
+          ""
+        )}
       </span>
-      {!isClosed &&
-        sub_menu.map((subItem, index) => (
-          <React.Fragment key={`${subItem.cod_menu} ${index}`}>
-            <SidebarItem
-              depth={depth + 1}
-              depthStep={depthStep}
-              items={subItem}
-              showSidebar={menu.showSidebar}
-            />
-          </React.Fragment>
-        ))}
-    </>
+      <div className="bg-gray-400 bg-opacity-40 rounded-b-lg">
+        {!isClosed &&
+          sub_menu.map((subItem, index) => (
+            <React.Fragment key={`${subItem.cod_menu} ${index}`}>
+              <SidebarItem
+                depth={depth + 1}
+                depthStep={depthStep}
+                items={subItem}
+                showSidebar={menu.showSidebar}
+              />
+            </React.Fragment>
+          ))}
+      </div>
+    </div>
   );
 }
 
