@@ -36,18 +36,15 @@ function SidebarItem(menu: SidebarMenu) {
           <a
             style={{ paddingLeft: depth * depthStep }}
             className="h-full w-full p-3 flex items-center justify-between  "
-            onClick={
-              !(Array.isArray(sub_menu) && sub_menu.length)
-                ? menu.showSidebar
-                : menu.showSidebar
-            }
+            onClick={menu.showSidebar}
           >
             {str_label}
           </a>
         </Link>
+
         {expandIcon ? (
           <span
-            className="bg-indigo-900  py-3 px-2 border-r-2 border-l-2 border-purple-400 rounded-full cursor-pointer flex items-center justify-center"
+            className="bg-indigo-900 py-3 px-2 border-r-2 border-l-2 border-purple-400 rounded-full cursor-pointer flex items-center justify-center"
             onClick={showSubMenu}
           >
             {expandIcon}

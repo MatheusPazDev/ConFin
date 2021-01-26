@@ -17,7 +17,7 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
   const showSidebar = () => setSidebar(!isSidebar);
 
   return (
-    <div className="bg-gray-100 flex border-r">
+    <div className="bg-gray-100 flex items-stretch justify-between">
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
@@ -42,7 +42,10 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
                 className="p-1"
                 onClick={showSidebar}
               >
-                <AiIcons.AiOutlineBars size={32} color="rgba(0,0,0,0.6)" />
+                <AiIcons.AiOutlineBars
+                  size={32}
+                  color="rgba(229, 231, 235, 1)"
+                />
               </button>
             )}
 
@@ -55,9 +58,15 @@ function Layout({ children, title = "Confin - Controle Financeiro" }: Props) {
           </div>
         </header>
 
-        <div className="bg-green-200 m-2 p-2">
-          <>{children}</>
+        <div className="bg-gray-300 h-full w-full">
+          <div className="bg-green-200 m-2 p-2 rounded-md h-noventa flex justify-center">
+            {children}
+          </div>
         </div>
+
+        <footer className="bg-purple-200 border-t border-b rounded-t-sm border-indigo-700 flex items-center justify-center">
+          <small>I'm the Footer.</small>
+        </footer>
       </main>
     </div>
   );

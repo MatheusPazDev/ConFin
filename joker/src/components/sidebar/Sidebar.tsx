@@ -26,9 +26,10 @@ function Sidebar({ isStatic, isSidebar, showSidebar }: any) {
         leaveTo="-ml-64"
       >
         <aside
-          className={`z-20 bg-indigo-900 w-64  min-h-screen flex flex-col ${
+          className={`z-20 bg-indigo-900 w-64 h-screen flex flex-col ${
             isStatic ? "" : "fixed"
-          }`}
+          }
+          overflow-auto scrollbar-thin scrollbar-thumb-blue-900 scrollbar-track-gray-100`}
         >
           <FocusTrap isActive={!isStatic}>
             <IconContext.Provider
